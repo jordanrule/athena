@@ -14,12 +14,12 @@ class State:
     environment: Environment
 
     @structure
-    class Initialization:
+    class Init:
         environment: Dict[str, any] = None  # environment can be use to overwrite system environment
 
     def __init__(self, message: Dict[str, any]):
         object_to_attributes(self, message.get)
-        self.environment = self.__annotations__[ENVIRONMENT](self.Initialization.environment)
+        self.environment = self.__annotations__[ENVIRONMENT](self.Init.environment)
         self.iter = True  # flag used for iterable subclass
 
     def to_message(self, environment=False) -> Dict[str, any]:
@@ -31,7 +31,7 @@ class State:
         return message
 
     def __str__(self):
-        return self.to_message()
+        return str(self.to_message())
 
     def __iter__(self):
         return self

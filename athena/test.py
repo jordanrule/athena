@@ -9,11 +9,17 @@ from athena.state import State
 
 logger = logging.getLogger(__name__)
 
-MESSAGE = 'message'
 STATE = 'state'
 
 
 class Validation:
+    """
+    Validation can be imported to automatically validate all functions that have automatically
+    generated inputs and outputs, for example:
+
+    class TestExample(Validation.ValidateAll):
+        pass
+    """
     class ValidateAll(unittest.TestCase):
         def validate(self):
             if os.path.exists('tests/input'):
@@ -28,13 +34,13 @@ class Validation:
                             func = getattr(func, func_name)
 
                         for case in os.listdir('tests/input/%s/%s' % (module_name, function_name)):
-                            payload_input = read_message('tests/input/%s/%s/%s/' % (module_name, function_name, case))
+                            message_input = read_message('tests/input/%s/%s/%s/' % (module_name, function_name, case))
 
                             func = getattr(func, '__wrapped__', func)
                             state = getattr(func, '__annotations__', {}).get(STATE, State)
-                            payload_actual = execute_message(func,
+                            message_actual = execute_message(func,
                                                              state,
-                                                             payload_input).generate_payload(config=True)
-                            payload_expected = read_message('tests/output/%s/%s/%s/' % (module_name, function_name, case))
-                            self.assertEquals(sorted(payload_expected), sorted(payload_actual),
+                                                             message_input).to_message(config=True)
+                            message_expected = read_message('tests/output/%s/%s/%s/' % (module_name, function_name, case))
+                            self.assertEquals(sorted(message_expected), sorted(message_actual),
                                               '%s/%s/%s case failed.' % (module_name, function_name, case))

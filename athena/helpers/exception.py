@@ -1,6 +1,6 @@
-class ConfigException(EnvironmentError):
+class EnvironmentException(EnvironmentError):
     """
-    Exception type for handling invalid configuration.
+    Exception type for handling invalid environment configuration.
     """
     def __init__(self, arg):
         self.strerror = arg

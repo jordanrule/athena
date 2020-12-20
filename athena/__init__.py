@@ -27,7 +27,7 @@ class ENVIRONMENT(Enum):
     TEST = 'test'
 
 
-LOCAL = 'local'
+LOCAL = 'LOCAL'
 ENVIRON = 'ENVIRONMENT'
 ENV = os.getenv(ENVIRON, ENVIRONMENT[LOCAL])
 

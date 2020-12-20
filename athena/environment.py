@@ -10,8 +10,8 @@ BASE = 'base'
 class Environment:
 
     @structure
-    class Initialization:
-        ENVIRONMENT: str = ENV  # environment is used to determine deployed environment
+    class Init:
+        ENV: str = ENV  # environment is used to determine deployed environment
         VALIDATE_PATH: str = BASE  # validate path is used to serialize @validate to disk
 
     def __init__(self, environment: Dict[str, any] = None):

@@ -2,7 +2,7 @@ import os
 import json
 from typing import Dict
 
-from athena.helpers.exception import ConfigException
+from athena.helpers.exception import EnvironmentException
 
 
 ATTACH = '__attachments__'
@@ -42,12 +42,12 @@ def object_to_attributes(obj, retrieve):
                 value = retrieve(att_name, None)
                 if value is None and not hasattr(clz, att_name):
                     exception_message = f"Missing required configuration: '{att_name}'"
-                    raise ConfigException(exception_message)
+                    raise EnvironmentException(exception_message)
                 setattr(clz, att_name, cast(clz, att_name)(value or getattr(clz, att_name, None)))
             setattr(obj, clz_name, clz)
 
 
-def object_to_dictionary(obj, compress=False):
+def object_to_dictionary(obj):
     message = {}
     for clz_name in (set(dir(obj)) - set(dir(object))):
         clz = getattr(obj, clz_name)
@@ -60,13 +60,12 @@ def object_to_dictionary(obj, compress=False):
 
 
 def read_message(path=''):
-    payload = {}
     if os.path.exists('%smessage.json' % path):
-        with open('%smessage.json' % path) as input_payload:
-            payload = json.loads(input_payload.read())
-            return payload
+        with open('%smessage.json' % path) as input_message:
+            message = json.loads(input_message.read())
+            return message
 
-    return payload
+    return {}
 
 
 def write_message(message: Dict[str, any], path=''):
