@@ -15,7 +15,7 @@ from athena.helpers.validate import validate
 
 class MyEnvironment(Environment):
     @structure
-    class Env:
+    class Var:
         SEED: int = 1
 
 class MyState(State):
@@ -28,7 +28,7 @@ class MyModel:
     @staticmethod
     @validate
     def main(state: MyState):
-        state.Data.test = state.Data.test + state.environment.Env.SEED
+        state.Data.test = state.Data.test + state.env.Var.SEED
         return state
 
 run(MyModel)
@@ -53,7 +53,7 @@ We can mock a non-default value for the input state by creating a `message.json`
 Any modifications to our environment will be reflected in our Python environment:
 
 ```
-> export SEED = 3
+> export SEED=3
 > python compute.py
 [athena.exec:20] {'test': 4}
 ```

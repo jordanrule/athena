@@ -5,6 +5,11 @@ LOCAL = 'local'
 
 
 def validate(func):
+    """
+    The validate decorator will automatically generate validation test cases to be run via Python
+    unittest as defined within athena.test.  Note that validate expects that these functions
+    are static and receive and produce a State (or State generator).
+    """
     @wraps(func)
     def generate_testcase(input_state):
         output_state = func(input_state)

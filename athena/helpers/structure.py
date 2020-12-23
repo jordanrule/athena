@@ -11,7 +11,12 @@ MESSAGE = 'message'
 
 def structure(clz=None):
     """
-    TODO: documentation
+    The structure decorator provides an interface to create structured data by defining inner data
+    classes within a Python object.  It respects Python typing and attribute syntax: object type
+    annotations are applied when deserializing JSON, and exceptions are thrown in cases where
+    underlying data is not represented and no default value has been provided.  In cases where a
+    default value is provided, the data within the structured source will override the underlying
+    default if present.
     """
     attachments = []
     # we look at annotations too, since attributes will not exist for required attachments
@@ -47,7 +52,7 @@ def object_to_attributes(obj, retrieve):
             setattr(obj, clz_name, clz)
 
 
-def object_to_dictionary(obj):
+def object_to_dictionary(obj) -> Dict[str, any]:
     message = {}
     for clz_name in (set(dir(obj)) - set(dir(object))):
         clz = getattr(obj, clz_name)

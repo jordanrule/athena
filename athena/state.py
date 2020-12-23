@@ -10,8 +10,14 @@ ENVIRONMENT = 'environment'
 
 
 class State:
+    """
+    State represents the parameterization of a piece of distributed computation.  It utilizes
+    the structure decorator to transparently deserialize JSON to a Python object for arbitrary
+    transformation, and then serialize the resulting Python object back to JSON for transport
+    over a distributed cluster.
+    """
 
-    environment: Environment
+    env: Environment
 
     @structure
     class Init:
@@ -19,14 +25,14 @@ class State:
 
     def __init__(self, message: Dict[str, any]):
         object_to_attributes(self, message.get)
-        self.environment = self.__annotations__[ENVIRONMENT](self.Init.environment)
+        self.env = self.__annotations__[ENVIRONMENT](self.Init.environment)
         self.iter = True  # flag used for iterable subclass
 
     def to_message(self, environment=False) -> Dict[str, any]:
         message = object_to_dictionary(self)
 
-        if self.environment and environment:
-            message[ENVIRONMENT] = object_to_dictionary(self.environment)
+        if self.env and environment:
+            message[ENVIRONMENT] = object_to_dictionary(self.env)
 
         return message
 

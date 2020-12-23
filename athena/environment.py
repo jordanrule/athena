@@ -8,6 +8,13 @@ BASE = 'base'
 
 
 class Environment:
+    """
+    Environment represents variables as they are defined within the running container.
+
+    In cases where a specific environment wants to be represented by the user, for example
+    during validation or to override container definitions, the "environment" key can be utilized
+    within the JSON representation of the State.
+    """
 
     @structure
     class Init:
@@ -23,5 +30,8 @@ class Environment:
         self.init = True
 
     def __setattr__(self, name, value):
+        """
+        Disallow setting attributes to values other than represented in environment.
+        """
         if not hasattr(self, 'init'):
             super().__setattr__(name, value)
