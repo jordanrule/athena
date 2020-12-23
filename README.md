@@ -19,7 +19,7 @@ class MyEnvironment(Environment):
         SEED: int = 1
 
 class MyState(State):
-    environment: MyEnvironment
+    env: MyEnvironment
     @structure
     class Data:
         test: int = 2
