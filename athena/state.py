@@ -6,7 +6,7 @@ from athena.helpers.structure import structure, object_to_attributes, object_to_
 
 logger = get_logger(__name__)
 
-ENVIRONMENT = 'environment'
+ENVIRONMENT = 'env'
 
 
 class State:
