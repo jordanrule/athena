@@ -61,7 +61,3 @@ Any modifications to our environment will be reflected in our Python environment
 Note that unit tests for our method are automatically generated in the `/tests/` subdirectory.  These files can be optionally be checked in and set to auto-run via a pull request builder via `athena.test` to ensure the consistency of methods are maintained over time.
 
 Note the defined limitations in the framework: `structure` must decorate an inner class of a `State` or `Environment` object, and `validate` must decorate a static method that receives and returns a state.
-
-## Future Work
-
-Athena is in use in a distributed compute environment by extending `athena.exec.run` to handle specific queue polling and service request implementations.  A more general implementation is additionally under consideration utilizing either [Open MPI](https://github.com/everpeace/kube-openmpi) or the [MPI Operator](https://github.com/kubeflow/mpi-operator).
