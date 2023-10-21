@@ -61,3 +61,7 @@ Any modifications to our environment will be reflected in our Python environment
 Note that unit tests for our method are automatically generated in the `/tests/` subdirectory.  These files can be optionally be checked in and set to auto-run via a pull request builder via `athena.test` to ensure the consistency of methods are maintained over time.
 
 Note the defined limitations in the framework: `structure` must decorate an inner class of a `State` or `Environment` object, and `validate` must decorate a static method that receives and returns a state.
+
+## Patron
+
+<a href="https://en.wikipedia.org/wiki/Pallas_Athena_(Rembrandt)"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Pallas_Athena_or%2C_Armoured_Figure_by_Rembrandt_Harmensz._van_Rijn.jpg/599px-Pallas_Athena_or%2C_Armoured_Figure_by_Rembrandt_Harmensz._van_Rijn.jpg" alt="Pallas Athena" width="300" height="400"></a>
